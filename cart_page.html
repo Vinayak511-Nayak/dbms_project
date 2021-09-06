@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+<style media="screen">
+h1{
+  position:relative;
+  margin-left:100px;
+  background-color:#D2691E;
+  width:150px;
+  font-size:30px;
+  border:0px;
+  padding-left:20px;
+}
+.body{
+  background-color:#8A2BE2;
+  height:1000px;
+  position:relative;
+  margin-top:20px;
+
+}
+h6{
+  font-size:30px;
+  position:relative;
+  margin-left:50px;
+  margin-top:50px;
+}
+h4{
+  position:relative;
+  margin-top:-130px;
+  margin-left:300px;
+}
+h5{
+  position:relative;
+  margin-top:40px;
+  margin-left:300px;
+}
+
+</style>
+<div class="body">
+  {%for items in item_price%}
+  {{items}}
+  <br>
+  {%endfor%}
+  {% for items in items_in_cart %}
+  <h1>{{items}}</h1>
+  <br>
+  {%endfor%}
+  <h4>60rs</h4>
+  <h5>40rs</h5>
+  <h6><a href="{{url_for('order')}}">PLACE ORDER</a></h6>
+
+</div>
+
+{% endblock %}

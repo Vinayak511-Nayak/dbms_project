@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{%block content%}
+{% set count = namespace(value=1) %}
+
+<style media="screen">
+  table,th,td{
+    border:2px solid black;
+    cell-size:80px;
+    width:30%;
+    cell-length:100px;
+    position:relative;
+    margin-left:30px;
+    margin-top:20px;
+
+  }
+  h2{
+    position:relative;
+    margin-left:1000px;
+    margin-top:-300px;
+  }
+</style>
+<p id="check"></p>
+<table>
+  <tr>
+    <th>{{key_list[0]}}</th>
+    <th>{{key_list[1]}}</th>
+    <th>{{key_list[2]}}</th>
+  </tr>
+
+  <tr>
+    <td>{{value_list[0]}}</td>
+    <td><button type="button" class="btn btn-secondary" style="width:100%" onclick="select_buttons('rice')" >{{value_list[1]}}</button></td>
+    <td>{{value_list[2]}}</td>
+  </tr>
+
+  <tr>
+    <td>{{value_list[3]}}</td>
+    <td><button type="button" class="btn btn-secondary" style="width:100%"  onclick="select_buttons('sugar')">{{value_list[4]}}</button></td>
+    <td>{{value_list[5]}}</td>
+  </tr>
+  <tr>
+    <td>{{value_list[6]}}</td>
+    <td><button type="button" class="btn btn-secondary" style="width:100%" onclick="select_buttons('thordal')">{{value_list[7]}}</button></td>
+    <td>{{value_list[8]}}</td>
+  </tr>
+
+  <tr>
+    <td>{{value_list[9]}}</td>
+    <td><button type="button" class="btn btn-secondary" style="width:100%" onclick="select_buttons('rawa')">{{value_list[10]}}</button></td>
+    <td>{{value_list[11]}}</td>
+  </tr>
+
+  <tr>
+    <td>{{value_list[12]}}</td>
+    <td><button type="button" class="btn btn-secondary" style="width:100%" onclick="select_buttons('chicken_masala')">{{value_list[13]}}</button></td>
+    <td>{{value_list[14]}}</td>
+  </tr>
+
+  <tr>
+    <td>{{value_list[15]}}</td>
+    <td><button type="button" class="btn btn-secondary" style="width:100%" onclick="select_buttons('paneer')">{{value_list[16]}}</button></td>
+    <td>{{value_list[17]}}</td>
+  </tr>
+
+  <tr>
+    <td>{{value_list[18]}}</td>
+    <td><button type="button" class="btn btn-secondary" style="width:100%" id="button6" onclick="select_buttons('cheese')">{{value_list[19]}}</button></td>
+    <td>{{value_list[20]}}</td>
+  </tr>
+
+</table>
+<h2><a href="{{url_for('cart_page')}}">cart</a></h2>
+<script type="text/javascript">
+  const selected_buttons=[];
+  function select_buttons(x)
+  {
+    selected_buttons.push(x);
+    alert('added to cart');
+    document.getElementById('check').innerHTML=selected_buttons;
+    senddata(x);
+  }
+
+  function senddata(x)
+  {
+    let xhr=new XMLHttpRequest();
+    let url="http://127.0.0.1:9999/add_item_cart"
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    var data = JSON.stringify({ 'its':x});
+    xhr.send(data);
+  }
+
+
+</script>
+
+
+{%endblock%}
